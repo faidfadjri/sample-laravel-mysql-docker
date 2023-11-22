@@ -1,18 +1,30 @@
-FROM php:8.2-fpm-alpine
+# Use the official PHP image with Alpine Linux
+FROM php:8.1.25-fpm-alpine3.17
 
+# Set the working directory
 WORKDIR /var/www/app
 
-RUN apk update && apk add \
-    curl \
-    libpng-dev \
-    libxml2-dev \
-    zip \
-    unzip
+# Update package repositories
+RUN apk update
 
-RUN docker-php-ext-install pdo pdo_mysql \
-    && apk --no-cache add nodejs npm
+# Install dependencies
+# RUN apk --no-cache add \
+#     curl \
+#     libpng-dev \
+#     libxml2-dev \
+#     zip \
+#     unzip \
+#     nodejs \
+#     npm \
+#     && docker-php-ext-install pdo pdo_mysql
 
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+# Copy Composer binary from the official Composer image
+COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
+RUN composer install
 
-# Change ownership and permissions for the application
+# Cleanup
+# RUN apk del libpng-dev libxml2-dev zip unzip nodejs npm && \
+#     rm -rf /var/cache/apk/*
+
+# Set the default command to run php-fpm
 CMD ["php-fpm"]

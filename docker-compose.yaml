@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 networks:
   laravel:
@@ -28,6 +28,10 @@ services:
     restart: unless-stopped
     tty: true
     working_dir: /var/www/app
+    ports:
+      - 9000:9000
+    dns:
+      - 8.8.8.8
     volumes:
       - .:/var/www/app
     networks:
