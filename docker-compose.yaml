@@ -28,10 +28,9 @@ services:
     restart: unless-stopped
     tty: true
     working_dir: /var/www/app
-    ports:
-      - 9000:9000
-    dns:
-      - 8.8.8.8
+    command: ["php-fpm"]
+    expose:
+      - "9000"
     volumes:
       - .:/var/www/app
     networks:
