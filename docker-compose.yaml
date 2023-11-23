@@ -27,8 +27,6 @@ services:
     container_name: php
     restart: unless-stopped
     tty: true
-    working_dir: /var/www/app
-    command: ["php-fpm"]
     expose:
       - "9000"
     volumes:
