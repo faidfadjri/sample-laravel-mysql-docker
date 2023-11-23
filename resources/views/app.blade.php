@@ -9,8 +9,6 @@
   <script src="https://unpkg.com/feather-icons"></script>
 
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
-  @vite('resources/js/app.js')
-
 </head>
 <body>
    @yield('content')
